@@ -45,3 +45,13 @@ where ORDER_COUNT > 2) AS three_or_more_order_users;
 -- TWO_ORDER_USERS	= 3 
 -- THREE_OR_MORE_ORDER_USERS = 0
 ```
+
+## On average, how many unique sessions do we have per hour?
+```snowflake-sql
+select min(CREATED_AT) as EARLIEST, max(CREATED_AT) as LATEST,
+       datediff('hour', EARLIEST, LATEST) as TOTAL_HOURS,
+       count(distinct session_id) as TOTAL_SESSIONS,
+       TOTAL_SESSIONS / TOTAL_HOURS as AVERAGE_SESSIONS_PER_HOUR
+from EVENTS;
+// result: 10.140351
+```
