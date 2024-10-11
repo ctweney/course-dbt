@@ -1,0 +1,38 @@
+version: 2
+sources:
+  - name: postgres
+    schema: public
+    database: raw
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness: # this is where we define freshness thresholds
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: addresses
+        description: >
+         Contains mailing addresses of users
+      - name: events
+        description: >
+         Contains events
+      - name: orders
+        description: >
+         Main order table
+      - name: order_items
+        description: >
+         Order to items join table
+      - name: products
+        description: >
+         Main products table
+      - name: promos
+        description: >
+         Promotions table
+      - name: users
+        description: >
+         Users table
+     
